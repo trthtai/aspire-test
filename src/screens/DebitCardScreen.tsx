@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, Text } from 'react-native';
+
+import { BaseScreen } from 'app/src/components/screens';
 
 export default class DebitCardScreen extends Component {
 	constructor(props: any) {
@@ -8,7 +10,11 @@ export default class DebitCardScreen extends Component {
 
 	render() {
 		return (
-			<SafeAreaView style={{ flex: 1 }}>
+			<BaseScreen
+				title="Debit Card"
+				style={{ backgroundColor: '#0D365A' }}
+				logo={<Text style={{ color: '#fff' }}>Logo</Text>}
+			>
 				<View
 					style={{
 						flex: 1,
@@ -20,7 +26,7 @@ export default class DebitCardScreen extends Component {
 						Debit Card Screen
 					</Text>
 				</View>
-			</SafeAreaView>
+			</BaseScreen>
 		);
 	}
 }
