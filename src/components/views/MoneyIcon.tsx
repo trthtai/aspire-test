@@ -14,7 +14,7 @@ const MoneyIcon = (props: MoneyIconProps) => {
 			style={{
 				height: 30,
 				paddingHorizontal: 16,
-				backgroundColor: '#04D167',
+				backgroundColor: colors.background.green,
 				borderRadius: 4,
 				alignItems: 'center',
 				justifyContent: 'center',
