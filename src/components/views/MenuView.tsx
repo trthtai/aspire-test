@@ -46,6 +46,7 @@ const MenuView = (props: MenuViewProps) => {
 	return (
 		<FlatList
 			ListHeaderComponent={props.headerView}
+			ListHeaderComponentStyle={{ zIndex: 0 }}
 			style={props.style}
 			data={props.data}
 			renderItem={renderItem}
