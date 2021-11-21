@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, Text, Image } from 'react-native';
 
 import images from 'app/src/res/images';
+import colors from 'app/src/res/colors';
 
 interface BaseScreenProps {
 	style?: object;
@@ -30,7 +31,7 @@ const BaseScreen = (props: BaseScreenProps) => {
 					marginTop: props.backButtonShown ? 20 : 54,
 					fontSize: 30,
 					fontWeight: 'bold',
-					color: '#fff',
+					color: colors.text.white,
 				}}
 			>
 				{props.title}
