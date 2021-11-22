@@ -49,7 +49,6 @@ const CardView = (props: CardViewProps) => {
 		<View
 			style={{
 				height: 170,
-				zIndex: 1,
 			}}
 		>
 			<View
@@ -59,9 +58,6 @@ const CardView = (props: CardViewProps) => {
 					backgroundColor: colors.background.green,
 					borderRadius: 10,
 					padding: 20,
-					position: 'absolute',
-					top: -50,
-					zIndex: 1,
 				}}
 			>
 				<Image style={{ alignSelf: 'flex-end' }} source={props.logo} />
@@ -121,7 +117,8 @@ const CardView = (props: CardViewProps) => {
 					alignItems: 'center',
 					position: 'absolute',
 					right: 0,
-					top: -80,
+					top: -30,
+					zIndex: -1,
 				}}
 			>
 				<TouchableOpacity onPress={onShowButtonTouch}>
@@ -134,7 +131,6 @@ const CardView = (props: CardViewProps) => {
 							paddingHorizontal: 10,
 							borderRadius: 10,
 							alignItems: 'center',
-							zIndex: 4,
 						}}
 					>
 						<Image

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Animated, PanResponder } from 'react-native';
+import { View, Animated, PanResponder, Dimensions } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { Dispatch } from 'redux';
 
@@ -45,6 +45,8 @@ class DebitCardScreen extends Component<Props, State> {
 		const { updateBalance } = this.props;
 		updateBalance(balance);
 	}
+
+	hidingValue = -150;
 
 	pan = new Animated.ValueXY();
 
@@ -144,13 +146,13 @@ class DebitCardScreen extends Component<Props, State> {
 							{ translateX: 0 },
 							{
 								translateY: this.pan.y.interpolate({
-									inputRange: [-150, 0],
-									outputRange: [-150, 0],
+									inputRange: [this.hidingValue, 0],
+									outputRange: [this.hidingValue, 0],
 									extrapolate: 'clamp',
 								}),
 							},
 						],
-						bottom: -150,
+						bottom: this.hidingValue,
 						backgroundColor: colors.background.white,
 						borderTopLeftRadius: 30,
 						borderTopRightRadius: 30,
@@ -159,35 +161,45 @@ class DebitCardScreen extends Component<Props, State> {
 					{...this.panResponder.panHandlers}
 				>
 					<MenuView
-						style={{
-							overflow: 'visible',
-							zIndex: -1,
-							elevation: 10,
-						}}
+						style={{}}
 						data={this.getMenuItems(balance.spendingLimit)}
 						headerView={
-							<View>
-								<CardView
-									logo={images.iconFullLogo}
-									number={balance.card.number}
-									name={balance.card.name}
-									expDate={new Date(balance.card.date)}
-									cardTypeLogo={CardService.getCardType(
-										balance.card.type
-									)}
-									cvv={balance.card.cvv}
-								/>
-								{balance.spendingLimit > 0 ? (
-									<ProgressBarView
-										style={{ marginTop: 10 }}
-										title="Weekly spending limit"
-										value={balance.spending}
-										totalValue={balance.spendingLimit}
-									/>
-								) : null}
-							</View>
+							<View
+								style={{
+									width: '100%',
+									height:
+										balance.spendingLimit > 0 ? 240 : 170,
+								}}
+							/>
 						}
 					/>
+					<View
+						style={{
+							width: '100%',
+							position: 'absolute',
+							alignSelf: 'center',
+							top: -50,
+						}}
+					>
+						<CardView
+							logo={images.iconFullLogo}
+							number={balance.card.number}
+							name={balance.card.name}
+							expDate={new Date(balance.card.date)}
+							cardTypeLogo={CardService.getCardType(
+								balance.card.type
+							)}
+							cvv={balance.card.cvv}
+						/>
+						{balance.spendingLimit > 0 ? (
+							<ProgressBarView
+								style={{ marginTop: 60 }}
+								title="Weekly spending limit"
+								value={balance.spending}
+								totalValue={balance.spendingLimit}
+							/>
+						) : null}
+					</View>
 				</Animated.View>
 			</BaseScreen>
 		);
