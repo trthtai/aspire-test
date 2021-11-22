@@ -7,11 +7,23 @@ import { BalanceView } from 'app/src/components/views';
 import colors from 'app/src/res/colors';
 import images from 'app/src/res/images';
 
-import { MenuView, CardView } from 'app/src/components/views';
+import { MenuView, CardView, ProgressBarView } from 'app/src/components/views';
 import { MenuItem } from 'app/src/components/views/MenuView';
 import { NavigationService } from 'app/src/services';
 
-export default class DebitCardScreen extends Component {
+interface Props {}
+
+interface State {
+	spendingLimitEnabled: boolean;
+}
+
+export default class DebitCardScreen extends Component<Props, State> {
+	constructor(props: any) {
+		super(props);
+
+		this.state = { spendingLimitEnabled: false };
+	}
+
 	pan = new Animated.ValueXY();
 
 	panResponder = PanResponder.create({
@@ -56,7 +68,6 @@ export default class DebitCardScreen extends Component {
 				NavigationService.navigationRef.navigate('SpendingLimit');
 			},
 			onSwitchChange: (value) => {
-				console.log(value);
 				if (value) {
 					NavigationService.navigationRef.navigate('SpendingLimit');
 				}
@@ -80,11 +91,8 @@ export default class DebitCardScreen extends Component {
 		},
 	];
 
-	constructor(props: any) {
-		super(props);
-	}
-
 	render() {
+		const { spendingLimitEnabled } = this.state;
 		return (
 			<BaseScreen
 				title="Debit Card"
@@ -100,13 +108,13 @@ export default class DebitCardScreen extends Component {
 							{ translateX: 0 },
 							{
 								translateY: this.pan.y.interpolate({
-									inputRange: [-80, 0],
-									outputRange: [-80, 0],
+									inputRange: [-150, 0],
+									outputRange: [-150, 0],
 									extrapolate: 'clamp',
 								}),
 							},
 						],
-						bottom: -80,
+						bottom: -150,
 						backgroundColor: colors.background.white,
 						borderTopLeftRadius: 30,
 						borderTopRightRadius: 30,
@@ -120,14 +128,24 @@ export default class DebitCardScreen extends Component {
 						}}
 						data={this.menuItems}
 						headerView={
-							<CardView
-								logo={images.iconFullLogo}
-								number={'1234 4567 1234 4352'}
-								name={'Mark Henry'}
-								expDate={new Date('11/11/1992')}
-								cardTypeLogo={images.iconVisa}
-								cvv={'123'}
-							/>
+							<View>
+								<CardView
+									logo={images.iconFullLogo}
+									number={'1234 4567 1234 4352'}
+									name={'Mark Henry'}
+									expDate={new Date('11/11/1992')}
+									cardTypeLogo={images.iconVisa}
+									cvv={'123'}
+								/>
+								{spendingLimitEnabled ? (
+									<ProgressBarView
+										style={{ marginTop: 10 }}
+										title="Weekly spending limit"
+										value={300}
+										totalValue={1000}
+									/>
+								) : null}
+							</View>
 						}
 					/>
 				</Animated.View>

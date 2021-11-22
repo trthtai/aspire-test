@@ -6,3 +6,4 @@ export { default as MenuItem } from './MenuView';
 export { default as CardView } from './CardView';
 export { default as MoneyShortcutItemView } from './MoneyShortcutItemView';
 export { default as MoneyShortcutView } from './MoneyShortcutView';
+export { default as ProgressBarView } from './ProgressBarView';
