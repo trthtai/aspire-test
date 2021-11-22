@@ -9,13 +9,15 @@
  */
 
 import React from 'react';
-
+import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
 
 import store from 'app/src/store';
+import images from 'app/src/res/images';
+import colors from 'app/src/res/colors';
 
 import {
 	CreditScreen,
@@ -37,27 +39,58 @@ const HomeTab = () => {
 			<Tab.Screen
 				name="Home"
 				component={HomeScreen}
-				options={{ headerShown: false }}
+				options={{
+					headerShown: false,
+					tabBarActiveTintColor: colors.background.green,
+					tabBarIcon: () => {
+						return <Image source={images.iconTabbar1} />;
+					},
+				}}
 			/>
 			<Tab.Screen
 				name="Debit"
 				component={DebitCardScreen}
-				options={{ headerShown: false, title: 'Debit Card' }}
+				options={{
+					headerShown: false,
+					title: 'Debit Card',
+					headerPressColor: colors.background.green,
+					tabBarIcon: () => {
+						return <Image source={images.iconTabbar2} />;
+					},
+				}}
 			/>
 			<Tab.Screen
 				name="Payment"
 				component={PaymentScreen}
-				options={{ headerShown: false }}
+				options={{
+					headerShown: false,
+					tabBarActiveTintColor: colors.background.green,
+					tabBarIcon: () => {
+						return <Image source={images.iconTabbar3} />;
+					},
+				}}
 			/>
 			<Tab.Screen
 				name="Credit"
 				component={CreditScreen}
-				options={{ headerShown: false }}
+				options={{
+					headerShown: false,
+					tabBarActiveTintColor: colors.background.green,
+					tabBarIcon: () => {
+						return <Image source={images.iconTabbar4} />;
+					},
+				}}
 			/>
 			<Tab.Screen
 				name="Profile"
 				component={ProfileScreen}
-				options={{ headerShown: false }}
+				options={{
+					headerShown: false,
+					tabBarActiveTintColor: colors.background.green,
+					tabBarIcon: () => {
+						return <Image source={images.iconTabbar5} />;
+					},
+				}}
 			/>
 		</Tab.Navigator>
 	);

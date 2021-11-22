@@ -71,7 +71,7 @@ const generate = () => {
 export default images
 `;
 
-	fs.writeFileSync('src/res/images.ts', string, 'utf8');
+	fs.writeFileSync('src/res/images.tsx', string, 'utf8');
 };
 
 generate();
