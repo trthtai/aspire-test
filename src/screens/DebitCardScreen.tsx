@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { View, Animated, PanResponder, Dimensions } from 'react-native';
+import {
+	View,
+	Animated,
+	PanResponder,
+	Dimensions,
+	StatusBar,
+} from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { Dispatch } from 'redux';
 
@@ -131,6 +137,7 @@ class DebitCardScreen extends Component<Props, State> {
 				title="Debit Card"
 				style={{ backgroundColor: '#0D365A' }}
 			>
+				<StatusBar barStyle="light-content" />
 				<BalanceView
 					style={{ marginLeft: 20 }}
 					amount={NumberHelper.formatNumber(
