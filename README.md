@@ -1,6 +1,6 @@
 # aspire-test
 
-| First Header  | Second Header | First Header  | Second Header |
+| User Story ID  | As a | I want to  | so that I can |
 | ------------- | ------------- | ------------- | ------------- |
-| Content Cell  | Content Cell  | Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| 1  | As a user  | View the available balance from my bank account | validate and check my current balance |
+| 2  | As a user  | Show and hide the card sensitive information | protect my sensitive card data from the strangers |
