@@ -13,8 +13,8 @@ import colors from 'app/src/res/colors';
 import images from 'app/src/res/images';
 
 import { MenuView, CardView, ProgressBarView } from 'app/src/components/views';
-import { MenuItem } from 'app/src/components/views/MenuView';
 import { NavigationService, CardService } from 'app/src/services';
+import { NumberHelper } from 'app/src/helpers';
 
 import { ApiBalance } from 'app/src/networking/apis';
 import { Balance } from 'app/src/networking/apis/ApiBalance';
@@ -131,9 +131,9 @@ class DebitCardScreen extends Component<Props, State> {
 			>
 				<BalanceView
 					style={{ marginLeft: 20 }}
-					amount={balance.balance
-						.toString()
-						.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+					amount={NumberHelper.formatNumber(
+						balance.balance.toString()
+					)}
 				/>
 				<Animated.View
 					style={{
@@ -161,6 +161,8 @@ class DebitCardScreen extends Component<Props, State> {
 					<MenuView
 						style={{
 							overflow: 'visible',
+							zIndex: -1,
+							elevation: 10,
 						}}
 						data={this.getMenuItems(balance.spendingLimit)}
 						headerView={

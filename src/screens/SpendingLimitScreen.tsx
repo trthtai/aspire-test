@@ -21,6 +21,7 @@ import { UpdateBalance } from 'app/src/store/actions';
 import { ApiBalance } from 'app/src/networking/apis';
 import { Balance } from 'app/src/networking/apis/ApiBalance';
 import { NavigationService } from 'app/src/services';
+import { NumberHelper } from 'app/src/helpers';
 
 import colors from 'app/src/res/colors';
 
@@ -142,9 +143,9 @@ class SpendingLimitScreen extends Component<Props, State> {
 										fontSize: 30,
 										fontWeight: 'bold',
 									}}
-									value={spendingLimit
-										.toString()
-										.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+									value={NumberHelper.formatNumber(
+										spendingLimit.toString()
+									)}
 									onChangeText={this.onInputChangeText}
 								/>
 							</View>

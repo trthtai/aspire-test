@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
+import { NumberHelper } from 'app/src/helpers';
+
 import colors from 'app/src/res/colors';
 
 interface MoneyShortcutItemViewProps {
@@ -23,9 +25,7 @@ const MoneyShortcutItemView = (props: MoneyShortcutItemViewProps) => {
 			>
 				<Text style={{ color: colors.background.green }}>{`${
 					props.currency
-				} ${props.value
-					.toString()
-					.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}</Text>
+				} ${NumberHelper.formatNumber(props.value.toString())}`}</Text>
 			</View>
 		</TouchableOpacity>
 	);
