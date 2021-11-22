@@ -16,15 +16,13 @@ interface MenuItemViewProps {
 	title: string;
 	subTitle: string;
 	switchShown?: boolean;
+	switchValue?: boolean;
 	onPress?: () => void;
 	onSwitchChange?: (value: boolean) => void;
 }
 
 const MenuItemView = (props: MenuItemViewProps) => {
-	const [enabled, setEnabled] = useState(false);
-
 	const onSwitchChange = (value: boolean) => {
-		setEnabled(value);
 		if (props.onSwitchChange) props.onSwitchChange(value);
 	};
 
@@ -76,7 +74,7 @@ const MenuItemView = (props: MenuItemViewProps) => {
 				{props.switchShown ? (
 					<Switch
 						style={{ marginLeft: 10 }}
-						value={enabled}
+						value={props.switchValue}
 						onValueChange={onSwitchChange}
 					/>
 				) : null}

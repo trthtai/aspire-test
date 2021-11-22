@@ -23,7 +23,9 @@ const MoneyShortcutItemView = (props: MoneyShortcutItemViewProps) => {
 			>
 				<Text style={{ color: colors.background.green }}>{`${
 					props.currency
-				} ${props.value.toString()}`}</Text>
+				} ${props.value
+					.toString()
+					.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}</Text>
 			</View>
 		</TouchableOpacity>
 	);

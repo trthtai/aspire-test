@@ -14,6 +14,7 @@ export type MenuItem = {
 	title: string;
 	subTitle: string;
 	switchShown?: boolean;
+	switchValue?: boolean;
 	onPress?: () => void;
 	onSwitchChange?: (value: boolean) => void;
 };
@@ -37,6 +38,7 @@ const MenuView = (props: MenuViewProps) => {
 				subTitle={item.subTitle}
 				icon={item.icon}
 				switchShown={item.switchShown}
+				switchValue={item.switchValue}
 				onSwitchChange={item.onSwitchChange}
 				onPress={item.onPress}
 			/>

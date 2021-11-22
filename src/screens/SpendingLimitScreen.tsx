@@ -8,29 +8,46 @@ import {
 	TouchableWithoutFeedback,
 	Keyboard,
 } from 'react-native';
+import { connect, ConnectedProps } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { BaseScreen } from 'app/src/components/screens';
 import { MoneyIcon, MoneyShortcutView } from 'app/src/components/views';
 import type { MoneyShortcutItem } from 'app/src/components/views/MoneyShortcutView';
 
+import { ApplicationState } from 'app/src/types';
+import { UpdateBalance } from 'app/src/store/actions';
+
+import { ApiBalance } from 'app/src/networking/apis';
+import { Balance } from 'app/src/networking/apis/ApiBalance';
+import { NavigationService } from 'app/src/services';
+
 import colors from 'app/src/res/colors';
 
-interface Props {}
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = PropsFromRedux & {};
+
+const mapStateToProps = (state: ApplicationState) => ({
+	balance: state.balance,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+	updateBalance: (balance: Balance) => dispatch(UpdateBalance(balance)),
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
 interface State {
 	spendingLimit: number;
 }
 
-export default class SpendingLimitScreen extends Component<Props, State> {
-	formatter = new Intl.NumberFormat('en-US', {
-		style: 'currency',
-		currency: 'SGD',
-	});
-
+class SpendingLimitScreen extends Component<Props, State> {
 	constructor(props: any) {
 		super(props);
 
+		const { balance } = this.props;
 		this.state = {
-			spendingLimit: 0,
+			spendingLimit: balance.spendingLimit,
 		};
 	}
 
@@ -39,6 +56,15 @@ export default class SpendingLimitScreen extends Component<Props, State> {
 			spendingLimit:
 				text == '' ? 0 : parseInt(text.split(',').join(''), 10),
 		});
+	};
+
+	onSavePress = () => {
+		const { spendingLimit } = this.state;
+		const balance =
+			ApiBalance.getInstance().setSpendingLimit(spendingLimit);
+		const { updateBalance } = this.props;
+		updateBalance(balance);
+		NavigationService.navigationRef.goBack();
 	};
 
 	moneyShortcuts: MoneyShortcutItem[] = [
@@ -150,7 +176,7 @@ export default class SpendingLimitScreen extends Component<Props, State> {
 							/>
 						</View>
 					</TouchableWithoutFeedback>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={this.onSavePress}>
 						<View
 							style={{
 								alignSelf: 'center',
@@ -179,3 +205,5 @@ export default class SpendingLimitScreen extends Component<Props, State> {
 		);
 	}
 }
+
+export default connector(SpendingLimitScreen);

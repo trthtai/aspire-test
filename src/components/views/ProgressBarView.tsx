@@ -37,7 +37,11 @@ const ProgressBarView = (props: ProgressBarViewProps) => {
 						position: 'absolute',
 						left: 0,
 						top: 0,
-						width: `${(props.value / props.totalValue) * 100}%`,
+						width: `${
+							(props.value / props.totalValue) * 100 > 100
+								? 100
+								: (props.value / props.totalValue) * 100
+						}%`,
 						height: 20,
 						backgroundColor: colors.background.green,
 						borderRadius: 10,

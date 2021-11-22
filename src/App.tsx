@@ -13,6 +13,9 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Provider } from 'react-redux';
+
+import store from 'app/src/store';
 
 import {
 	CreditScreen,
@@ -62,20 +65,25 @@ const HomeTab = () => {
 
 const App = () => {
 	return (
-		<NavigationContainer ref={NavigationService.navigationRef}>
-			<Stack.Navigator>
-				<Stack.Screen
-					name="HomeTab"
-					component={HomeTab}
-					options={{ headerShown: false }}
-				/>
-				<Stack.Screen
-					name="SpendingLimit"
-					component={SpendingLimitScreen}
-					options={{ headerShown: false, title: 'Spending Limit' }}
-				/>
-			</Stack.Navigator>
-		</NavigationContainer>
+		<Provider store={store}>
+			<NavigationContainer ref={NavigationService.navigationRef}>
+				<Stack.Navigator>
+					<Stack.Screen
+						name="HomeTab"
+						component={HomeTab}
+						options={{ headerShown: false }}
+					/>
+					<Stack.Screen
+						name="SpendingLimit"
+						component={SpendingLimitScreen}
+						options={{
+							headerShown: false,
+							title: 'Spending Limit',
+						}}
+					/>
+				</Stack.Navigator>
+			</NavigationContainer>
+		</Provider>
 	);
 };
 
