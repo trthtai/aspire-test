@@ -9,18 +9,10 @@
  */
 
 import React from 'react';
-import {
-	SafeAreaView,
-	ScrollView,
-	StatusBar,
-	StyleSheet,
-	Text,
-	useColorScheme,
-	View,
-} from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import {
 	CreditScreen,
@@ -28,40 +20,61 @@ import {
 	HomeScreen,
 	PaymentScreen,
 	ProfileScreen,
+	SpendingLimitScreen,
 } from 'app/src/screens';
 
+import { NavigationService } from 'app/src/services';
+
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+const HomeTab = () => {
+	return (
+		<Tab.Navigator>
+			<Tab.Screen
+				name="Home"
+				component={HomeScreen}
+				options={{ headerShown: false }}
+			/>
+			<Tab.Screen
+				name="Debit"
+				component={DebitCardScreen}
+				options={{ headerShown: false, title: 'Debit Card' }}
+			/>
+			<Tab.Screen
+				name="Payment"
+				component={PaymentScreen}
+				options={{ headerShown: false }}
+			/>
+			<Tab.Screen
+				name="Credit"
+				component={CreditScreen}
+				options={{ headerShown: false }}
+			/>
+			<Tab.Screen
+				name="Profile"
+				component={ProfileScreen}
+				options={{ headerShown: false }}
+			/>
+		</Tab.Navigator>
+	);
+};
 
 const App = () => {
 	return (
-		<NavigationContainer>
-			<Tab.Navigator>
-				<Tab.Screen
-					name="Home"
-					component={HomeScreen}
+		<NavigationContainer ref={NavigationService.navigationRef}>
+			<Stack.Navigator>
+				<Stack.Screen
+					name="HomeTab"
+					component={HomeTab}
 					options={{ headerShown: false }}
 				/>
-				<Tab.Screen
-					name="Debit Card"
-					component={DebitCardScreen}
-					options={{ headerShown: false }}
+				<Stack.Screen
+					name="SpendingLimit"
+					component={SpendingLimitScreen}
+					options={{ headerShown: false, title: 'Spending Limit' }}
 				/>
-				<Tab.Screen
-					name="Payment"
-					component={PaymentScreen}
-					options={{ headerShown: false }}
-				/>
-				<Tab.Screen
-					name="Credit"
-					component={CreditScreen}
-					options={{ headerShown: false }}
-				/>
-				<Tab.Screen
-					name="Profile"
-					component={ProfileScreen}
-					options={{ headerShown: false }}
-				/>
-			</Tab.Navigator>
+			</Stack.Navigator>
 		</NavigationContainer>
 	);
 };

@@ -14,7 +14,8 @@ export type MenuItem = {
 	title: string;
 	subTitle: string;
 	switchShown?: boolean;
-	onSwitchChange?: () => void;
+	onPress?: () => void;
+	onSwitchChange?: (value: boolean) => void;
 };
 
 interface MenuViewProps {
@@ -37,6 +38,7 @@ const MenuView = (props: MenuViewProps) => {
 				icon={item.icon}
 				switchShown={item.switchShown}
 				onSwitchChange={item.onSwitchChange}
+				onPress={item.onPress}
 			/>
 		);
 	};
@@ -46,7 +48,6 @@ const MenuView = (props: MenuViewProps) => {
 	return (
 		<FlatList
 			ListHeaderComponent={props.headerView}
-			ListHeaderComponentStyle={{ zIndex: 0 }}
 			style={props.style}
 			data={props.data}
 			renderItem={renderItem}

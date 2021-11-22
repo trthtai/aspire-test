@@ -4,22 +4,27 @@ import { View, TouchableOpacity, Text, Image } from 'react-native';
 import images from 'app/src/res/images';
 import colors from 'app/src/res/colors';
 
+import { NavigationService } from 'app/src/services';
+
 interface BaseScreenProps {
 	style?: object;
 	title?: string;
 	children?: object;
 	backButtonShown?: boolean;
-	logo?: object;
 }
 
 const BaseScreen = (props: BaseScreenProps) => {
+	const onBackButtonPress = () => {
+		NavigationService.navigationRef.goBack();
+	};
+
 	return (
 		<View style={{ flex: 1, ...props.style }}>
 			<View style={{ position: 'absolute', right: 20, top: 54 }}>
-				{props.logo}
+				<Image source={images.iconSmallLogo} />
 			</View>
 			{props.backButtonShown ? (
-				<TouchableOpacity>
+				<TouchableOpacity onPress={onBackButtonPress}>
 					<View style={{ marginLeft: 20, marginTop: 54 }}>
 						<Image source={images.iconBack} />
 					</View>

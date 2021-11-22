@@ -49,49 +49,9 @@ const CardView = (props: CardViewProps) => {
 		<View
 			style={{
 				height: 170,
+				zIndex: 1,
 			}}
 		>
-			<View
-				style={{
-					backgroundColor: colors.background.white,
-					width: 180,
-					height: 60,
-					borderRadius: 10,
-					alignItems: 'center',
-					position: 'absolute',
-					right: 0,
-					top: -80,
-				}}
-			>
-				<TouchableOpacity onPress={onShowButtonTouch}>
-					<View
-						style={{
-							backgroundColor: colors.background.white,
-							width: 180,
-							height: 30,
-							flexDirection: 'row',
-							paddingHorizontal: 10,
-							borderRadius: 10,
-							alignItems: 'center',
-						}}
-					>
-						<Image
-							source={
-								showNumbers ? images.iconHide : images.iconShow
-							}
-						/>
-						<Text
-							style={{
-								color: colors.background.green,
-								marginLeft: 10,
-								fontWeight: '600',
-							}}
-						>
-							{showNumberTitle}
-						</Text>
-					</View>
-				</TouchableOpacity>
-			</View>
 			<View
 				style={{
 					width: '100%',
@@ -101,7 +61,7 @@ const CardView = (props: CardViewProps) => {
 					padding: 20,
 					position: 'absolute',
 					top: -50,
-					zIndex: 0,
+					zIndex: 1,
 				}}
 			>
 				<Image style={{ alignSelf: 'flex-end' }} source={props.logo} />
@@ -151,6 +111,48 @@ const CardView = (props: CardViewProps) => {
 					source={props.cardTypeLogo}
 					style={{ alignSelf: 'flex-end' }}
 				/>
+			</View>
+			<View
+				style={{
+					backgroundColor: colors.background.white,
+					width: 180,
+					height: 60,
+					borderRadius: 10,
+					alignItems: 'center',
+					position: 'absolute',
+					right: 0,
+					top: -80,
+				}}
+			>
+				<TouchableOpacity onPress={onShowButtonTouch}>
+					<View
+						style={{
+							backgroundColor: colors.background.white,
+							width: 180,
+							height: 30,
+							flexDirection: 'row',
+							paddingHorizontal: 10,
+							borderRadius: 10,
+							alignItems: 'center',
+							zIndex: 4,
+						}}
+					>
+						<Image
+							source={
+								showNumbers ? images.iconHide : images.iconShow
+							}
+						/>
+						<Text
+							style={{
+								color: colors.background.green,
+								marginLeft: 10,
+								fontWeight: '600',
+							}}
+						>
+							{showNumberTitle}
+						</Text>
+					</View>
+				</TouchableOpacity>
 			</View>
 		</View>
 	);

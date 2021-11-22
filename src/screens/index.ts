@@ -3,3 +3,4 @@ export { default as DebitCardScreen } from './DebitCardScreen';
 export { default as HomeScreen } from './HomeScreen';
 export { default as PaymentScreen } from './PaymentScreen';
 export { default as ProfileScreen } from './ProfileScreen';
+export { default as SpendingLimitScreen } from './SpendingLimitScreen';

@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, Image, ImageSourcePropType, Switch } from 'react-native';
+import {
+	View,
+	Text,
+	Image,
+	ImageSourcePropType,
+	Switch,
+	TouchableOpacity,
+} from 'react-native';
 
 import colors from 'app/src/res/colors';
 
@@ -9,7 +16,8 @@ interface MenuItemViewProps {
 	title: string;
 	subTitle: string;
 	switchShown?: boolean;
-	onSwitchChange?: () => void;
+	onPress?: () => void;
+	onSwitchChange?: (value: boolean) => void;
 }
 
 const MenuItemView = (props: MenuItemViewProps) => {
@@ -17,61 +25,63 @@ const MenuItemView = (props: MenuItemViewProps) => {
 
 	const onSwitchChange = (value: boolean) => {
 		setEnabled(value);
-		if (props.onSwitchChange) props.onSwitchChange();
+		if (props.onSwitchChange) props.onSwitchChange(value);
 	};
 
 	return (
-		<View
-			style={{
-				flexDirection: 'row',
-				alignItems: 'center',
-				width: '100%',
-				height: 60,
-				...props.style,
-			}}
-		>
+		<TouchableOpacity onPress={props.onPress}>
 			<View
 				style={{
-					width: 36,
-					height: 36,
-					borderRadius: 18,
-					backgroundColor: '#325BAF',
+					flexDirection: 'row',
 					alignItems: 'center',
-					justifyContent: 'center',
+					width: '100%',
+					height: 60,
+					...props.style,
 				}}
 			>
-				<Image source={props.icon} />
-			</View>
-			<View style={{ flex: 1, marginLeft: 10 }}>
-				<Text
+				<View
 					style={{
-						color: colors.text.title,
-						fontSize: 16,
-						fontWeight: '500',
+						width: 36,
+						height: 36,
+						borderRadius: 18,
+						backgroundColor: '#325BAF',
+						alignItems: 'center',
+						justifyContent: 'center',
 					}}
-					numberOfLines={1}
 				>
-					{props.title}
-				</Text>
-				<Text
-					style={{
-						color: colors.text.subtitle,
-						fontSize: 15,
-						fontWeight: '500',
-					}}
-					numberOfLines={1}
-				>
-					{props.subTitle}
-				</Text>
+					<Image source={props.icon} />
+				</View>
+				<View style={{ flex: 1, marginLeft: 10 }}>
+					<Text
+						style={{
+							color: colors.text.title,
+							fontSize: 16,
+							fontWeight: '500',
+						}}
+						numberOfLines={1}
+					>
+						{props.title}
+					</Text>
+					<Text
+						style={{
+							color: colors.text.subtitle,
+							fontSize: 15,
+							fontWeight: '500',
+						}}
+						numberOfLines={1}
+					>
+						{props.subTitle}
+					</Text>
+				</View>
+				{props.switchShown ? (
+					<Switch
+						style={{ marginLeft: 10 }}
+						value={enabled}
+						onValueChange={onSwitchChange}
+					/>
+				) : null}
 			</View>
-			{props.switchShown ? (
-				<Switch
-					style={{ marginLeft: 10 }}
-					value={enabled}
-					onValueChange={onSwitchChange}
-				/>
-			) : null}
-		</View>
+		</TouchableOpacity>
 	);
 };
 
